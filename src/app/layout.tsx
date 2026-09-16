@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import ScrollRuler from "@/components/ScrollRuler";
 import DeskTools from "@/components/DeskTools";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -11,11 +12,11 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://toolsy.online";
-const SITE_NAME = "Geo Mukkath — AI-Native Product Manager";
 const SITE_TITLE = "Geo Mukkath | AI-Native Product Manager (toolsy.online)";
-const SITE_DESCRIPTION =
-  "Official website of Geo Mukkath — AI-native product manager building everyday tools people use at work. User empathy + AI fluency, prototyped and shipped with AI.";
+
+export const viewport: Viewport = {
+  themeColor: "#1a5fb4",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -29,12 +30,16 @@ export const metadata: Metadata = {
     "Geo Mukkath",
     "Geo Mukkath product manager",
     "Geo Mukkath AI",
+    "Geo Mukkath portfolio",
     "toolsy.online",
     "AI-native product manager",
     "AI product manager",
     "product manager portfolio",
     "AI prototyping",
     "LLM product management",
+    "QuickShapes",
+    "QuickShapes wireframing tool",
+    "Geo Mukkath QuickShapes",
   ],
   creator: "Geo Mukkath",
   authors: [{ name: "Geo Mukkath", url: SITE_URL }],
@@ -53,23 +58,42 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "website",
+    type: "profile",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: "toolsy.online",
     locale: "en_US",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Geo Mukkath — AI-Native Product Manager",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: ["/opengraph-image"],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}/#profilepage`,
+      url: SITE_URL,
+      name: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en",
+      mainEntity: { "@id": `${SITE_URL}/#person` },
+      publisher: { "@id": `${SITE_URL}/#person` },
+    },
     {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
@@ -89,6 +113,7 @@ const jsonLd = {
         "Prompt engineering",
         "User empathy",
         "Rapid iteration",
+        "Wireframing tools",
       ],
       sameAs: [
         "https://www.linkedin.com/in/geomukkath",
@@ -104,6 +129,22 @@ const jsonLd = {
       description: SITE_DESCRIPTION,
       publisher: { "@id": `${SITE_URL}/#person` },
       inLanguage: "en",
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#quickshapes`,
+      name: "QuickShapes",
+      applicationCategory: "DesignApplication",
+      operatingSystem: "Web",
+      url: "https://quickshapes.toolsy.online",
+      description:
+        "QuickShapes is a minimalist wireframing tool for product teams, built by Geo Mukkath. Sketch UI ideas as fast as thinking them — no learning curve, no bloat.",
+      author: { "@id": `${SITE_URL}/#person` },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
     },
   ],
 };

@@ -6,7 +6,7 @@ export default function About() {
   const ref = useScrollReveal(0.1);
 
   return (
-    <section className="py-24 px-6 relative">
+    <section id="about" className="py-24 px-6 relative">
       <div className="section-divider max-w-4xl mx-auto mb-24" />
 
       <div className="figure-label absolute right-4 top-32 hidden md:block">

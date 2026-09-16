@@ -3,6 +3,7 @@ import About from "@/components/About";
 import Process from "@/components/Process";
 import BodyOfWork from "@/components/BodyOfWork";
 import Philosophy from "@/components/Philosophy";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Process />
       <BodyOfWork />
       <Philosophy />
+      <FAQ />
       <Contact />
     </main>
   );

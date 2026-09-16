@@ -6,7 +6,7 @@ export default function Contact() {
   const ref = useScrollReveal(0.1);
 
   return (
-    <section className="py-24 px-6 relative">
+    <section id="contact" className="py-24 px-6 relative">
       <div className="section-divider max-w-4xl mx-auto mb-24" />
 
       <div className="figure-label absolute left-12 top-32 hidden md:block">
@@ -45,7 +45,7 @@ export default function Contact() {
           <a
             href="https://www.linkedin.com/in/geomukkath"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             className="group flex items-center gap-2 border border-blueprint/30 px-6 py-3 font-display text-[11px] text-blueprint tracking-[0.1em] uppercase hover:bg-blueprint hover:text-white transition-all duration-300"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="group-hover:stroke-white">
@@ -79,7 +79,7 @@ export default function Contact() {
             Built with AI + user empathy
           </p>
           <p className="font-display text-[9px] tracking-[0.1em] mt-2 opacity-60">
-            © 2024 toolsy.online
+            © {new Date().getFullYear()} toolsy.online
           </p>
         </div>
       </div>
