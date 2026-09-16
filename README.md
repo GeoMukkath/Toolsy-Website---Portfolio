@@ -24,7 +24,6 @@ Open [http://localhost:3000](http://localhost:3000) to see the result.
 
 - `robots.txt` explicitly allows AI crawlers: GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot, and more
 - `/llms.txt` serves a concise, quotable brief about Geo Mukkath for LLMs (via `src/app/llms.txt/route.ts`)
-- FAQ section renders answer-first Q&A content that LLMs can cite directly
 
 ## Launch checklist (do once, after deploying)
 

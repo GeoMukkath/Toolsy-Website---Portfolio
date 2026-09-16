@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { playPaperRubbing, playSharpClick, unlockAudio } from "@/lib/sounds";
+import {
+  playPaperRubbing,
+  playSharpClick,
+  attachAudioUnlock,
+  unlockAudio,
+} from "@/lib/sounds";
 
 /**
  * Right-side calibration ruler in the style of makingsoftware.com.
@@ -61,6 +66,9 @@ export default function ScrollRuler() {
 
   useEffect(() => {
     unlockAudio();
+    // Keep retrying the audio unlock on every interaction until the
+    // context runs, so the first scroll after load is audible.
+    const detachAudioUnlock = attachAudioUnlock();
     lastYRef.current = window.scrollY;
     recalculate();
     updateProgress();
@@ -102,10 +110,6 @@ export default function ScrollRuler() {
 
     window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, { passive: true });
-    // First interaction unlocks the AudioContext (browser autoplay policy).
-    window.addEventListener("pointerdown", unlockAudio, { once: true });
-    window.addEventListener("keydown", unlockAudio, { once: true });
-    window.addEventListener("wheel", unlockAudio, { once: true, passive: true });
     // Re-measure once fonts/layout have settled.
     const timer = setTimeout(() => {
       recalculate();
@@ -114,9 +118,7 @@ export default function ScrollRuler() {
     return () => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("pointerdown", unlockAudio);
-      window.removeEventListener("keydown", unlockAudio);
-      window.removeEventListener("wheel", unlockAudio);
+      detachAudioUnlock();
       clearTimeout(timer);
     };
   }, [recalculate, updateProgress]);
